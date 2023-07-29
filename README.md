@@ -1,7 +1,7 @@
-# DiscordBot-Python //Development Branch
+# DiscordBot-Python //Production
 A discord bot built using python
 
-This is the branch used for new development. Before changes are made to the main branch
+This is the main branch, Production code is here
 
 Project for CMPG 323 Homework
 
