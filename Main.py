@@ -31,7 +31,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     #grabs this information. Prints it to console.
-    username = str(message.author).split('#')[0]
+    username = str(message.author).split('#')[0] #takes out the useless stuff after the username. Even with the new system in disc there is still a hashtag for some reason
 
     if message.author == bot.user: #ignore messages made by the bot
         return
@@ -45,7 +45,16 @@ async def on_message(message):
 
     await bot.process_commands(message)
 
-
+#keeps track of last deleted message
+Deleted_Message = "No message to snipe" 
+@bot.event
+async def on_message_delete(message):
+    username = str(message.author).split('#')[0]
+    #await message.channel.send("No")
+    global Deleted_Message 
+    Deleted_Message = f'{username} deleted the message: {message.content}'
+    print(Deleted_Message)
+    await bot.process_commands(message)
 
 
 #_______________________________________________________________________________________________________________
@@ -63,6 +72,9 @@ async def roll(ctx, num):
     randomNum = randint(1, int(num))
     await ctx.channel.send(f'You rolled a {randomNum}')
 
+@bot.command()
+async def snipe(ctx):
+    await ctx.channel.send(f'```{Deleted_Message}```')
 
 
 #running the bot
